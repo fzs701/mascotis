@@ -20,6 +20,7 @@ public class Mascota {
     private double peso;
     private ArrayList<Servicio> historialServicios = new ArrayList<>();
     
+    //sobrecarga constructores para crear mascotas con distintos detalles
     public Mascota(int id, String nombre, String especie, String raza, int edad, double peso){
         this.id = id;
         this.nombre = nombre;
@@ -63,6 +64,8 @@ public class Mascota {
     
     public double getPeso() { return peso; }
     public void setPeso(double peso) { this.peso = peso;}
+    
+    //sobrecarga de metodos para agregar servicio con distintos parametros
     
     public void agregarServicio(Servicio servicio){
         historialServicios.add(servicio);

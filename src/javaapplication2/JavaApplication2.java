@@ -11,18 +11,22 @@ import java.util.*;
  * @author usuario
  */
 public class JavaApplication2 {
-    
+    //mapa para almcenar clientes usando rut como clave
     static HashMap<String, Cliente> clientes = new HashMap<>();
+    
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    
+    //contador para asignar ID unico a cada mascota
     static int mascotaId = 1;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
         
-        agregarDatosIniciales();
+        agregarDatosIniciales(); //carga datos inciales para comprobar
         int opcion;
-        do {
+        do { 
+            //menu principal del sistema
             System.out.println("\n--- MENÚ ---");
             System.out.println("1. Agregar cliente");
             System.out.println("2. Agregar mascota");
@@ -56,7 +60,7 @@ public class JavaApplication2 {
                 
         }while (opcion != 6);
     }
-    
+    //permite registrar un nuevo cliente ingresando sus datos
     public static void agregarCliente() throws IOException {
         System.out.print("RUT cliente: ");
         String rut = br.readLine();
@@ -74,7 +78,7 @@ public class JavaApplication2 {
         System.out.println("Cliente agregado exitosamente");
         
     }
-    
+    //permite registrar una mascota a un cliente existente :0
     public static void agregarMascota() throws IOException{
         System.out.print("Ingrese RUT del dueño de la mascota: ");
         String rut = br.readLine();
@@ -84,7 +88,7 @@ public class JavaApplication2 {
             System.out.print("Dueño no encontrado :(");
             return;
         }
-        
+        //datos de la mascota
         System.out.print("Nombre de la mascota: ");
         String nombreM = br.readLine();
         System.out.print("Especie: ");
@@ -102,6 +106,7 @@ public class JavaApplication2 {
         
         
     }
+    //muestra todas las mascotas de un cliente ingresando rut
     public static void mostrarMascotaPorCliente() throws IOException {
         System.out.print("Ingrese RUT del cliente: ");
         String rut = br.readLine();
@@ -124,6 +129,8 @@ public class JavaApplication2 {
                     m.getNombre() , m.getEspecie() , m.getRaza() , m.getEdad() , m.getPeso());
         }
     }
+    
+    //agrega algunos datos por defecto al sistema para pruebas
     public static void agregarDatosIniciales(){
         Cliente c1 = new Cliente("22222222-2", "Emilia Perez", "900000000", "emi@perez", "av. argentina");
         c1.agregarMascota(new Mascota(mascotaId++, "Puppy"));
@@ -131,7 +138,7 @@ public class JavaApplication2 {
         
         clientes.put(c1.getRut(), c1);
     }
-    
+    //permite agendar un servicio para una mascota de un cliente
     public static void agendarServicio() throws IOException {
         System.out.print("RUT del cliente: ");
         String rut = br.readLine();
@@ -178,9 +185,11 @@ public class JavaApplication2 {
         String observaciones = br.readLine();
         
         
-        mascota.agregarServicio(tipoServicio,fecha,profesional,observaciones);
+        mascota.agregarServicio(tipoServicio,fecha,profesional,observaciones); //sobrecarga metodo
         System.out.println("Servicio agendado.");
     }
+    //permite mostrar historial de servicios por mascota o por 
+    //toda la veterinaria
     public static void mostrarHistorialServicios() throws IOException {
         System.out.println("¿Qué historial desa ver?");
         System.out.println("1. Historial de una mascota");
