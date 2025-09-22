@@ -9,6 +9,9 @@ package javaapplication2;
  * @author usuario
  */
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 
 public class Cliente {
     private String rut;
@@ -33,8 +36,11 @@ public class Cliente {
         mascotas.add(new Mascota(JavaApplication2.mascotaId++, nombre));
     }
     
-    public ArrayList<Mascota> getMascotas() {
-        return mascotas;
+    public List<Mascota> getMascotas() {
+        return Collections.unmodifiableList(mascotas);
+    }
+    public void eliminarMascotaCliente(Mascota m) {
+        mascotas.remove(m);
     }
     //get y set
     public String getRut() { return rut; }
@@ -53,4 +59,5 @@ public class Cliente {
     public String getDireccion() { return direccion; }
     public void setDireccion(String direccion) {this.direccion = direccion;}
 
+    
 }
