@@ -34,5 +34,13 @@ public class Veterinaria {
         try { id = Integer.parseInt(idStr); } catch (NumberFormatException e) { id = -1; }
         throw new MascotaNoEncontrada(id);
     }
+    
+    public Mascota getMascotaOrThrow(Cliente cliente, int id) throws MascotaNoEncontrada {
+        for (Mascota m : cliente.getMascotas()) {
+            if (m.getId() == id) return m;
+        }
+        throw new MascotaNoEncontrada(id);
+}
+
 }
     

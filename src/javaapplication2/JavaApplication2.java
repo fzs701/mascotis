@@ -15,7 +15,7 @@ import javaapplication2.exceptions.MascotaNoEncontrada;
  */
 public class JavaApplication2 {
     //mapa para almcenar clientes usando rut como clave
-    static HashMap<String, Cliente> clientes = new HashMap<>();
+    static final HashMap<String, Cliente> clientes = new HashMap<>();
     static final Veterinaria servicio = new Veterinaria(clientes);
     
     //contador para asignar ID unico a cada mascota
@@ -37,6 +37,9 @@ public class JavaApplication2 {
                 "Editar Mascota",
                 "Eliminar Mascota",
                 "Filtrar Mascotas",
+                "Editar Cliente",
+                "Eliminar Cliente",
+                "Buscar Mascota (global)",
                 "Salir"
             };
             
@@ -230,7 +233,12 @@ public class JavaApplication2 {
             String idSt = pedirTextoObligatoria("ID mascota: ");
             if(idSt == null ) return;
 
-            Mascota mascota = servicio.getMascotaOrThrow(cliente, idSt);
+            Mascota mascota;
+            try {
+                mascota = servicio.getMascotaOrThrow(cliente, Integer.parseInt(idSt));
+            } catch (NumberFormatException nfe) {
+                mascota = servicio.getMascotaOrThrow(cliente, idSt);
+            }
 
             String[] tipos = {"Consulta General", "Peluquería"};
             String tipo = (String) JOptionPane.showInputDialog(
@@ -425,6 +433,7 @@ public class JavaApplication2 {
             }
             
             String peso = JOptionPane.showInputDialog("Nuevo peso:", mascota.getPeso());
+            if(peso == null) return;
             if (!peso.isBlank()) {
                 try {
                     mascota.setPeso(Double.parseDouble(peso.trim()));
