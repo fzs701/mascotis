@@ -58,6 +58,9 @@ public class JavaApplication2 {
                 case "Mostrar mascotas del cliente": mostrarMascotaPorCliente();break;
                 case "Agendar servicio": agendarServicio(); break;
                 case "Mostrar historial de servicios": mostrarHistorialServicios();break;
+                case "Editar Mascota": editarMascota(); break;
+                case "Eliminar Mascota": eliminarMascota(); break;
+                case "Filtrar Mascotas": filtrarMascotas(); break;
                 default: JOptionPane.showMessageDialog(null, "Opción inválida"); break;
                     
                 
@@ -85,32 +88,35 @@ public class JavaApplication2 {
     }
     //permite registrar una mascota a un cliente existente :0
     public static void agregarMascota() throws IOException{
-        System.out.print("Ingrese RUT del dueño de la mascota: ");
-        String rut = br.readLine();
-        
-        Cliente cliente = clientes.get(rut);
-        if (cliente == null) {
-            System.out.print("Dueño no encontrado :(");
-            return;
+        try {
+            String rut = JOptionPane.showInputDialog("Ingrese RUT del dueño de la mascota: ");
+            Cliente cliente = clientes.get(rut);
+            if (cliente == null) {
+                System.out.print("Dueño no encontrado :(");
+                return;
+            }
+            //datos de la mascota
+            System.out.print("Nombre de la mascota: ");
+            String nombreM = br.readLine();
+            System.out.print("Especie: ");
+            String especie = br.readLine();
+            System.out.print("Raza: ");
+            String raza = br.readLine();
+            System.out.print("Edad: ");
+            int edad = Integer.parseInt(br.readLine());
+            System.out.print("Peso: ");
+            double peso = Double.parseDouble(br.readLine());
+
+            Mascota mascota = new Mascota(mascotaId++, nombreM, especie, raza, edad, peso);
+            cliente.agregarMascota(mascota);
+            System.out.println("Mascota agregada al cliente " + cliente.getNombre());
         }
-        //datos de la mascota
-        System.out.print("Nombre de la mascota: ");
-        String nombreM = br.readLine();
-        System.out.print("Especie: ");
-        String especie = br.readLine();
-        System.out.print("Raza: ");
-        String raza = br.readLine();
-        System.out.print("Edad: ");
-        int edad = Integer.parseInt(br.readLine());
-        System.out.print("Peso: ");
-        double peso = Double.parseDouble(br.readLine());
-        
-        Mascota mascota = new Mascota(mascotaId++, nombreM, especie, raza, edad, peso);
-        cliente.agregarMascota(mascota);
-        System.out.println("Mascota agregada al cliente " + cliente.getNombre());
-        
         
     }
+    
+    
+    
+    
     //muestra todas las mascotas de un cliente ingresando rut
     public static void mostrarMascotaPorCliente() throws IOException {
         try {
@@ -384,5 +390,59 @@ public class JavaApplication2 {
         
         }
     }
+    
+    public static void filtrarMascotas()  {
+        try {
+            String especie = JOptionPane.showInputDialog("Ingrese especie a filtrar (eje: perro, gato): ");
+            double pesoMin = Double.parseDouble(JOptionPane.showInputDialog("Ingrese peso mínimo: "));
+            double pesoMax = Double.parseDouble(JOptionPane.showInputDialog("Ingrese peso máximo: "));
+            
+            List<Mascota> filtradas = new ArrayList<>();
+            
+            for(Cliente cliente : clientes.values()) {
+                for(Mascota m : cliente.getMascotas()){
+                    if(m.getEspecie().equalsIgnoreCase(especie) && m.getPeso() >= pesoMin && m.getPeso()<= pesoMax){
+                        filtradas.add(m);
+                    }
+                }
+            }
+            
+            if(filtradas.isEmpty()){
+                JOptionPane.showMessageDialog(null,"No se encontraron mascotas con ese criterio.");
+                return;
+            }
+            
+            String[] columnas = {"ID","Nombre","Especie","Raza","Edad","Peso"};
+            Object[][] datos = new Object[filtradas.size()][6];
+            
+            for(int i = 0; i < filtradas.size(); i++){
+                Mascota m = filtradas.get(i);
+                datos[i][0] = m.getId();
+                datos[i][1] = m.getNombre();
+                datos[i][2] = m.getEspecie();
+                datos[i][3] = m.getRaza();
+                datos[i][4] = m.getEdad();
+                datos[i][5] = m.getPeso();
+                
+                
+            }
+            
+            JTable table = new JTable(datos, columnas);
+            JScrollPane scroll = new JScrollPane(table);
+            JOptionPane.showMessageDialog(null, scroll,  "Mascotas filtradas", JOptionPane.INFORMATION_MESSAGE);
+            
+            
+       
+            JOptionPane.showMessageDialog(null,"Mascota editada correctamente :)");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Error al filtrar mascotas","Error", JOptionPane.ERROR_MESSAGE);
+        
+        }
+    }
+    
+    public class 
+    
+    
+    
     
 }

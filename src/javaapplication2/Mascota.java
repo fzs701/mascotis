@@ -83,6 +83,7 @@ public class Mascota {
     }
     
     
+    //hacer un clone pk es mala practica hacerlo asi, y no debe regresar pk aunque este todavia se podria modificar. 
     public List<Servicio> getHistorialServicios() {
         return Collections.unmodifiableList(historialServicios);
     }
