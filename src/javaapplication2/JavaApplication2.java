@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package javaapplication2;
-import java.io.*;
 import java.util.*;
 import javax.swing.*;
+
 
 /**
  *
@@ -15,14 +15,12 @@ public class JavaApplication2 {
     //mapa para almcenar clientes usando rut como clave
     static HashMap<String, Cliente> clientes = new HashMap<>();
     
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    
     //contador para asignar ID unico a cada mascota
     static int mascotaId = 1;
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         
         agregarDatosIniciales(); //carga datos inciales para comprobar
         //menu principal del sistema
@@ -55,9 +53,9 @@ public class JavaApplication2 {
             switch (opcion){
                 case "Agregar Cliente": agregarCliente(); break;
                 case "Agregar Mascota": agregarMascota(); break;
-                case "Mostrar mascotas del cliente": mostrarMascotaPorCliente();break;
+                case "Mostrar mascotas del cliente": mostrarMascotaPorCliente(); break;
                 case "Agendar servicio": agendarServicio(); break;
-                case "Mostrar historial de servicios": mostrarHistorialServicios();break;
+                case "Mostrar historial de servicios": mostrarHistorialServicios(); break;
                 case "Editar Mascota": editarMascota(); break;
                 case "Eliminar Mascota": eliminarMascota(); break;
                 case "Filtrar Mascotas": filtrarMascotas(); break;
@@ -69,6 +67,28 @@ public class JavaApplication2 {
                 
         }
     }
+    
+    public static String pedirTextoObligatoria(String mensaje) {
+        String input;
+        while(true) {
+            input = JOptionPane.showInputDialog(mensaje);
+            if(input == null){
+                return null;
+            }
+            if (!input.isBlank()){
+                return input.trim();
+            }
+            JOptionPane.showMessageDialog(null,"El campo no puede estar vacío.");
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     //permite registrar un nuevo cliente ingresando sus datos
     public static void agregarCliente() {
         try {
@@ -86,31 +106,49 @@ public class JavaApplication2 {
             JOptionPane.showMessageDialog(null, "Error al agregar cliente","Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    
+    
+    
+    
     //permite registrar una mascota a un cliente existente :0
     public static void agregarMascota() {
         try {
             String rut = JOptionPane.showInputDialog("Ingrese RUT del dueño de la mascota: ");
+            if(rut == null) return;
             Cliente cliente = clientes.get(rut);
             if (cliente == null) {
-                 JOptionPane.showMessageDialog(null, "Cliente no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
-                 
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; 
             }
                 
             //datos de la mascota
             
             
-            String nombreM = JOptionPane.showInputDialog("Nombre de la mascota: ");
-            String especie = JOptionPane.showInputDialog("Especie: ");
-            String raza = JOptionPane.showInputDialog("Raza: ");
-            int edad = Integer.parseInt(JOptionPane.showInputDialog("Edad: "));
-            double peso = Double.parseDouble(JOptionPane.showInputDialog("Peso: "));
+            String nombreM = pedirTextoObligatoria("Nombre de la mascota: ");
+            if(nombreM == null) return;
+            String especie = pedirTextoObligatoria("Especie: ");
+            if(especie == null) return;
+            String raza = pedirTextoObligatoria("Raza: ");
+            if(raza == null) return;
+            String edadST = pedirTextoObligatoria("Edad: ");
+            if(edadST == null) return;
+            int edad = Integer.parseInt(edadST);
+            String pesoST = pedirTextoObligatoria("Peso: ");
+            if(pesoST == null) return;
+            double peso = Double.parseDouble(pesoST);
             
 
             Mascota mascota = new Mascota(mascotaId++, nombreM, especie, raza, edad, peso);
             cliente.agregarMascota(mascota);
             JOptionPane.showMessageDialog(null, "Mascota agregada al cliente " + cliente.getNombre());
             System.out.println("Mascota agregada al cliente " + cliente.getNombre());
-        }
+        }catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Edad/Peso inválidos", "Error", JOptionPane.ERROR_MESSAGE);
+            
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar mascota", "Error", JOptionPane.ERROR_MESSAGE);
+    }
         
         
     }
@@ -119,7 +157,7 @@ public class JavaApplication2 {
     
     
     //muestra todas las mascotas de un cliente ingresando rut
-    public static void mostrarMascotaPorCliente() throws IOException {
+    public static void mostrarMascotaPorCliente()  {
         try {
             String rut = JOptionPane.showInputDialog("Ingrese RUT del cliente: ");
 
@@ -165,133 +203,153 @@ public class JavaApplication2 {
         
         clientes.put(c1.getRut(), c1);
     }
+    
+    
+    
+    
+    
     //permite agendar un servicio para una mascota de un cliente
-    public static void agendarServicio() throws IOException {
-        System.out.print("RUT del cliente: ");
-        String rut = br.readLine();
+    public static void agendarServicio() {
+        String rut = pedirTextoObligatoria("RUT del cliente: ");
+        if(rut == null) return;
         Cliente cliente = clientes.get(rut);
         if (cliente == null){
-            System.out.println("Cliente no encontrado.");
+            JOptionPane.showMessageDialog(null,"Cliente no encontrado.");
             return;
         }
+        if(cliente.getMascotas().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Cliente no tiene mascotas.");
+            return;
+        }
+        String idSt = pedirTextoObligatoria("ID mascota: ");
+        if(idSt == null ) return;
         
-        System.out.print("ID mascota: ");
-        int idMascota = Integer.parseInt(br.readLine());
         Mascota mascota = null;
         for(Mascota m : cliente.getMascotas()) {
-            if (m.getId() == idMascota ){
+            if (String.valueOf(m.getId()).equals(idSt)){
                 mascota = m;
                 break;
             }
         }
         if (mascota == null){
-            System.out.println("Mascota no encontrada.");
+            JOptionPane.showMessageDialog(null,"Mascota no encontrada.");
             return;
         }
-        System.out.println("Seleccione tipo de servicio:");
-        System.out.println("1. Consulta General");
-        System.out.println("2. Peluquería");
-        System.out.print("Tipo: ");
-        int tipo = Integer.parseInt(br.readLine());
+        String[] tipos = {"Consulta General", "Peluquería"};
+        String tipo = (String) JOptionPane.showInputDialog(
+                null,"Tipo de servicio:","Agendar servicio",
+                JOptionPane.QUESTION_MESSAGE,null,tipos,tipos[0]
+        );
+        if(tipo == null) return;
         
-        String tipoServicio = "";
-        if(tipo == 1){
-            tipoServicio = "Consulta General";
-        } else if (tipo == 2){
-            tipoServicio = "Peluquería";
+        
+        String fecha = pedirTextoObligatoria("Fecha (dd-mm-aaaa): ");
+        if(fecha == null ) return;
+        String profesional = pedirTextoObligatoria("Nombre del profesional: ");
+        if(profesional == null) return;
+        String observaciones = pedirTextoObligatoria("Observaciones: ");
+        if(observaciones == null) return;
+        if("Consulta General".equals(tipo)){
+            mascota.agregarServicio(new ConsultaGeneral(fecha,profesional,observaciones)); //sobrecarga metodo
+        
         } else {
-            System.out.println("Opción inválida");
-            return;
+            mascota.agregarServicio(new ConsultaGeneral(fecha,profesional,observaciones)); //sobrecarga metodo
+        
         }
-        
-        System.out.print("Fecha (dd-mm-aaaa): ");
-        String fecha = br.readLine();
-        System.out.print("Nombre del profesional: ");
-        String profesional = br.readLine();
-        System.out.print("Observaciones: ");
-        String observaciones = br.readLine();
-        
-        
-        mascota.agregarServicio(tipoServicio,fecha,profesional,observaciones); //sobrecarga metodo
-        System.out.println("Servicio agendado.");
+        JOptionPane.showMessageDialog(null, "Servicio agendado.");
     }
     //permite mostrar historial de servicios por mascota o por 
     //toda la veterinaria
-    public static void mostrarHistorialServicios() throws IOException {
-        System.out.println("¿Qué historial desa ver?");
-        System.out.println("1. Historial de una mascota");
-        System.out.println("2. Historial completo de todas las mascotas");
-        System.out.print("Opción: ");
-        int opcion = Integer.parseInt(br.readLine());
-        
-        if(opcion == 1) {   
-            System.out.print("RUT del cliente: ");
-            String rut = br.readLine();
+    
+    
+    
+    
+    public static void mostrarHistorialServicios() {
+        String[] opciones = {"Historial de una mascota", "Historial completo de todas las mascotas"};
+        String opcion = (String) JOptionPane.showInputDialog(
+               null, "¿Qué historial desea ver?", "Historial",
+               JOptionPane.QUESTION_MESSAGE,null,opciones,opciones[0]);
+        if (opcion == null) return;
+
+        if (opcion.equals(opciones[0])){   
+            String rut = pedirTextoObligatoria("RUT del cliente: ");
+            if(rut == null) return;
             Cliente cliente = clientes.get(rut);
             if(cliente == null ){
-                System.out.println("Cliente no encontrado.");
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
                 return;
             }
-            System.out.print("ID de la mascota: ");
-            int id = Integer.parseInt(br.readLine());
+            if(cliente.getMascotas().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Cliente no tiene mascotas.");
+                return;
+            }
+            String idSt = pedirTextoObligatoria("ID mascota: ");
+            if(idSt == null ) return;
             Mascota mascota = null;
             for( Mascota m : cliente.getMascotas()) {
-                if(m.getId() == id) {
+                if (String.valueOf(m.getId()).equals(idSt)){
                     mascota = m;
                     break;
                 }
             }
             if (mascota == null) {
-                System.out.println("Mascota no encontrada.");
+                JOptionPane.showMessageDialog(null,"Mascota no encontrada.");
                 return;
             }
 
 
             List<Servicio> historial = mascota.getHistorialServicios();
             if(historial.isEmpty()){
-                System.out.println("No hay servicios registrados para esta mascota :(");
+                JOptionPane.showMessageDialog(null,"No hay servicios registrados para esta mascota :(");
                 return;
             }
-            System.out.println("Historial de servicios para " + mascota.getNombre() + ":");
-            for(Servicio s : historial) {
-                System.out.println("---------");
-                System.out.println("Tipo: " + s.getTipoServicio());
-                System.out.println("Fecha: " + s.getFecha());
-                System.out.println("Profesional: " + s.getProfesional());
-                System.out.println("Observaciones: " + s.getObservaciones());
+            String[] columnas = {"Tipo", "Fecha", "Profesional", "Observaciones"};
+            Object[][] datos = new Object[historial.size()][4];
+            for(int i = 0; i < historial.size(); i++){
+                Servicio s = historial.get(i);
+                datos[i][0] = s.getTipoServicio();
+                datos[i][1] = s.getFecha();
+                datos[i][2] = s.getProfesional();
+                datos[i][3] = s.getObservaciones();
             }
-            
-        } else if (opcion == 2) {
-            boolean hayServicios = false;
+            JTable table = new JTable(datos, columnas);
+            JScrollPane scroll = new JScrollPane(table);
+            JOptionPane.showMessageDialog(null, scroll, 
+                "Historial de " + mascota.getNombre(), JOptionPane.INFORMATION_MESSAGE);
+
+        } else {
+            List<Object[]> filas = new ArrayList<>();
             for(Cliente cliente : clientes.values()){
                 for(Mascota mascota : cliente.getMascotas()){
-                    List<Servicio> historial = mascota.getHistorialServicios();
-                    if(!historial.isEmpty()){
-                        hayServicios = true;
-                        System.out.println("Cliente: " + cliente.getNombre() + " (RUT: " + cliente.getRut() + ")");
-                        System.out.println("Mascota: " + mascota.getNombre() + " (ID: " + mascota.getId() + ")");
-                        for(Servicio s : historial) {
-                            System.out.println("---------");
-                            System.out.println("Tipo: " + s.getTipoServicio());
-                            System.out.println("Fecha: " + s.getFecha());
-                            System.out.println("Profesional: " + s.getProfesional());
-                            System.out.println("Observaciones: " + s.getObservaciones());
+                    for(Servicio s : mascota.getHistorialServicios()){
+                        filas.add(new Object[]{
+                            cliente.getNombre(),mascota.getNombre(),s.getTipoServicio(),
+                            s.getFecha(), s.getProfesional(), s.getObservaciones()
                             
-                        }
-                        System.out.println();
+                        });
                     }
                 }
             }
-            if(!hayServicios){
-                System.out.println("No hay servicios registrados :(");
+            if (filas.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No hay servicios registrados en el sistema.");
+                return;
             }
+             String[] columnas = {"Cliente", "Mascota", "Servicio", "Fecha", "Profesional", "Observaciones"};
+            Object[][] datos = filas.toArray(new Object[0][]);
+
+            JTable table = new JTable(datos, columnas);
+            JScrollPane scroll = new JScrollPane(table);
+            JOptionPane.showMessageDialog(null, scroll,
+                "Historial completo de servicios", JOptionPane.INFORMATION_MESSAGE);
+
             
-            
-            
-        }else {
-            System.out.println("Opción inválida");
         }
     }
+    
+    
+    
+    
+    
     
     public static void eliminarMascota()  {
         try {
@@ -329,7 +387,7 @@ public class JavaApplication2 {
                     "Seguro que de desea eliminar a " + mascota.getNombre() + "?",
                     "Confirmar eliminación",
                     JOptionPane.YES_NO_OPTION);
-            if(confirma == JOptionPane.YES_NO_OPTION ){
+            if(confirma == JOptionPane.YES_OPTION ){
                 cliente.eliminarMascotaCliente(mascota);
                 JOptionPane.showMessageDialog(null,"Mascota eliminada");
                 
@@ -340,6 +398,11 @@ public class JavaApplication2 {
         
         }
     }
+    
+    
+    
+    
+    
     
     public static void editarMascota()  {
         try {
@@ -392,6 +455,16 @@ public class JavaApplication2 {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void filtrarMascotas()  {
         try {
             String especie = JOptionPane.showInputDialog("Ingrese especie a filtrar (eje: perro, gato): ");
@@ -434,7 +507,6 @@ public class JavaApplication2 {
             
             
        
-            JOptionPane.showMessageDialog(null,"Mascota editada correctamente :)");
         } catch (Exception e){
             JOptionPane.showMessageDialog(null,"Error al filtrar mascotas","Error", JOptionPane.ERROR_MESSAGE);
         

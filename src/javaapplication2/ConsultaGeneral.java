@@ -22,7 +22,7 @@ public class ConsultaGeneral extends Servicio {
     }
     @Override
     public String getResumen(){
-        return "[Consulta] " + getTipoServicio()  + "Fecha "  +getFecha() + " (" + getProfesional() + ")";
-    }
+        return "[Consulta] " + getTipoServicio() + " @ " + getFecha() + " (" + getProfesional() + ")";
+        }
     
 }

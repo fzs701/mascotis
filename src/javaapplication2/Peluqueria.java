@@ -27,6 +27,7 @@ public class Peluqueria extends Servicio {
     }
     @Override
     public String getResumen(){
-        return "[Peluquería] " + getTipoServicio()  + getFecha() + " (" + getProfesional() + ")";
+        return "[Peluquería] " + getTipoServicio() + " @ " + getFecha() + " (" + getProfesional() + ")";
+
     }
 }

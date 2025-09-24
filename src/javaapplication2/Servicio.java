@@ -23,7 +23,7 @@ public abstract class Servicio {
         }
         
         if(observaciones == null || observaciones.isBlank()){
-            this.profesional = "No hay observaciones.";
+            this.observaciones = "No hay observaciones.";
         } else {
             this.observaciones = observaciones;
         }
@@ -47,7 +47,7 @@ public abstract class Servicio {
     //sobreescritura de metodos
     
     public String getResumen() {
-        return getTipoServicio() + "Fecha " + fecha + " (" + profesional + ")";
+        return getTipoServicio() + " @ " + fecha + " (" + profesional + ")";
     }
     
     
