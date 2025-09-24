@@ -4,34 +4,35 @@
  */
 
 package javaapplication2;
+
 /**
  *
  * @author usuario
  */
-public class Servicio {
-    private String tipoServicio;
+public abstract class Servicio {
     private String fecha;
     private String profesional;
     private String observaciones;
     
-    public Servicio(String tipoServicio, String fecha, String profesional, String observaciones){
-        this.tipoServicio = tipoServicio;
+    public Servicio(String fecha, String profesional, String observaciones){
         this.fecha = fecha;
-        this.profesional = profesional;
-        this.observaciones = observaciones;
+        if(profesional == null || profesional.isBlank()){
+            this.profesional = "Sin información.";
+        }else {
+            this.profesional = profesional;
+        }
+        
+        if(observaciones == null || observaciones.isBlank()){
+            this.profesional = "No hay observaciones.";
+        } else {
+            this.observaciones = observaciones;
+        }
     }
-    public Servicio(String tipoServicio, String fecha){
-        this.tipoServicio = tipoServicio;
-        this.fecha = fecha;
-        this.profesional = "Sin información.";
-        this.observaciones = "No hay observaciones.";
-    }
-   
    
     
     
-    public void setTipoServicio(String tipoServicio) { this.tipoServicio = tipoServicio; }
-    public String getTipoServicio() { return tipoServicio; }
+    public abstract String getTipoServicio();
+    public abstract double calcularCosto();
     
     public void setFecha(String fecha) { this.fecha = fecha; }
     public String getFecha() { return fecha; }
@@ -41,6 +42,13 @@ public class Servicio {
     
     public void setObservaciones(String observaciones) { this.observaciones = observaciones; }
     public String getObservaciones() { return observaciones; }
+    
+    
+    //sobreescritura de metodos
+    
+    public String getResumen() {
+        return getTipoServicio() + "Fecha " + fecha + " (" + profesional + ")";
+    }
     
     
     

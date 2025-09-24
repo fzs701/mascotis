@@ -87,30 +87,31 @@ public class JavaApplication2 {
         }
     }
     //permite registrar una mascota a un cliente existente :0
-    public static void agregarMascota() throws IOException{
+    public static void agregarMascota() {
         try {
             String rut = JOptionPane.showInputDialog("Ingrese RUT del dueño de la mascota: ");
             Cliente cliente = clientes.get(rut);
             if (cliente == null) {
-                System.out.print("Dueño no encontrado :(");
-                return;
+                 JOptionPane.showMessageDialog(null, "Cliente no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                 
             }
+                
             //datos de la mascota
-            System.out.print("Nombre de la mascota: ");
-            String nombreM = br.readLine();
-            System.out.print("Especie: ");
-            String especie = br.readLine();
-            System.out.print("Raza: ");
-            String raza = br.readLine();
-            System.out.print("Edad: ");
-            int edad = Integer.parseInt(br.readLine());
-            System.out.print("Peso: ");
-            double peso = Double.parseDouble(br.readLine());
+            
+            
+            String nombreM = JOptionPane.showInputDialog("Nombre de la mascota: ");
+            String especie = JOptionPane.showInputDialog("Especie: ");
+            String raza = JOptionPane.showInputDialog("Raza: ");
+            int edad = Integer.parseInt(JOptionPane.showInputDialog("Edad: "));
+            double peso = Double.parseDouble(JOptionPane.showInputDialog("Peso: "));
+            
 
             Mascota mascota = new Mascota(mascotaId++, nombreM, especie, raza, edad, peso);
             cliente.agregarMascota(mascota);
+            JOptionPane.showMessageDialog(null, "Mascota agregada al cliente " + cliente.getNombre());
             System.out.println("Mascota agregada al cliente " + cliente.getNombre());
         }
+        
         
     }
     
@@ -440,8 +441,7 @@ public class JavaApplication2 {
         }
     }
     
-    public class 
-    
+   
     
     
     

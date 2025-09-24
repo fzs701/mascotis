@@ -1,4 +1,5 @@
 package javaapplication2;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Mascota {
     private String raza;
     private int edad;
     private double peso;
-    private ArrayList<Servicio> historialServicios = new ArrayList<>();
+    private final ArrayList<Servicio> historialServicios = new ArrayList<>();
     
     //sobrecarga constructores para crear mascotas con distintos detalles
     public Mascota(int id, String nombre, String especie, String raza, int edad, double peso){
@@ -73,15 +74,6 @@ public class Mascota {
     public void agregarServicio(Servicio servicio){
         historialServicios.add(servicio);
     }
-    public void agregarServicio(String tipo, String fecha){
-        Servicio s = new Servicio(tipo, fecha);
-        historialServicios.add(s);
-    }
-    public void agregarServicio(String tipo, String fecha, String profesional, String observaciones){
-        Servicio s = new Servicio(tipo, fecha, profesional, observaciones);
-        historialServicios.add(s);
-    }
-    
     
     //hacer un clone pk es mala practica hacerlo asi, y no debe regresar pk aunque este todavia se podria modificar. 
     public List<Servicio> getHistorialServicios() {
