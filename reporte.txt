@@ -1,0 +1,128 @@
+===== REPORTE DE CLIENTES, MASCOTAS Y SERVICIOS =====
+
+Cliente:   fran (12)
+Teléfono:  1234567
+Correo:    fran@pucv
+Dirección: av.argentina
+  Mascota: kira [ID: 16]
+    Especie: gato
+    Raza:    calico
+    Edad:    2 años
+    Peso:    6.5 kg
+    >> No tiene servicios registrados.
+
+  Mascota: luna [ID: 17]
+    Especie: perro
+    Raza:    bravo
+    Edad:    13 años
+    Peso:    5.0 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
+Cliente:   leo (100000000)
+Teléfono:  45678900
+Correo:    lein}
+Dirección: los leones
+  >> No tiene mascotas registradas
+
+----------------------------------------------------
+
+Cliente:   Diego Morales (10463607-7)
+Teléfono:  979345493
+Correo:    diego10@hotmail.com
+Dirección: Camino Real #393
+  Mascota: Mustafa [ID: 15]
+    Especie: Gato
+    Raza:    Mestizo
+    Edad:    11 años
+    Peso:    8.5 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
+Cliente:   Juan Soto (5612024-6)
+Teléfono:  928765432
+Correo:    juan.soto@gmail.com
+Dirección: Av. Central #123
+  Mascota: Pipo [ID: 11]
+    Especie: Perro
+    Raza:    Beagle
+    Edad:    3 años
+    Peso:    12.8 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
+Cliente:   Emilia Perez (22222222-2)
+Teléfono:  900000000
+Correo:    emi@perez
+Dirección: av. argentina
+  Mascota: Puppy [ID: 9]
+    Especie: desconocido
+    Raza:    desconocido
+    Edad:    0 años
+    Peso:    0.0 kg
+    >> No tiene servicios registrados.
+
+  Mascota: Luna [ID: 10]
+    Especie: Perro
+    Raza:    Pug
+    Edad:    4 años
+    Peso:    5.5 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
+Cliente:   lulu (123456789)
+Teléfono:  9800254345
+Correo:    frani@frani
+Dirección: lo barnechea
+  Mascota: frani [ID: 18]
+    Especie: pez
+    Raza:    goldfish
+    Edad:    4 años
+    Peso:    1.0 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
+Cliente:   Camila Diaz (3650272-2)
+Teléfono:  928865234
+Correo:    camila82@gmail.com
+Dirección: Camino Real #133
+  Mascota: Firulais [ID: 12]
+    Especie: Conejo
+    Raza:    Rex
+    Edad:    5 años
+    Peso:    3.9 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
+Cliente:   Diego Duarte (4964586-3)
+Teléfono:  966970038
+Correo:    diego88@hotmail.com
+Dirección: Av. Principal #295
+  Mascota: Max [ID: 13]
+    Especie: Gato
+    Raza:    Siames
+    Edad:    3 años
+    Peso:    15.3 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
+Cliente:   Sofia Rojas (16258823-6)
+Teléfono:  995403240
+Correo:    sofia27@hotmail.com
+Dirección: Calle Secundaria #14
+  Mascota: Rocky [ID: 14]
+    Especie: Perro
+    Raza:    Poodle
+    Edad:    9 años
+    Peso:    34.3 kg
+    >> No tiene servicios registrados.
+
+----------------------------------------------------
+
