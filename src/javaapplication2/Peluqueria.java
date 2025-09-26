@@ -15,6 +15,7 @@ public class Peluqueria extends Servicio {
         super(fecha, profesional, observacion);
         this.pesoMascota = pesoMascota;
     }
+    //sobreescritura de metodos
     @Override
     public String getTipoServicio() { 
         return "Peluquería";

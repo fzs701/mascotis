@@ -9,7 +9,6 @@ package javaapplication2;
  * @author usuario
  */
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -37,7 +36,7 @@ public class Cliente {
     }
     
     public List<Mascota> getMascotas() {
-        return Collections.unmodifiableList(mascotas);
+        return new ArrayList<>(mascotas);
     }
     public void eliminarMascotaCliente(Mascota m) {
         mascotas.remove(m);

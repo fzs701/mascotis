@@ -25,7 +25,8 @@ public class Veterinaria {
         if (c == null) throw new ClienteNoEncontrado(rut);
         return c;
     }
-
+    
+    //sobrecarga de metodos
     public Mascota getMascotaOrThrow(Cliente cliente, String idStr) throws MascotaNoEncontrada {
         for (Mascota m : cliente.getMascotas()) {
             if (String.valueOf(m.getId()).equals(idStr)) return m;

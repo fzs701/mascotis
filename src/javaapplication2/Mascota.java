@@ -1,7 +1,7 @@
 package javaapplication2;
 
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.List;
 
 /*
@@ -69,15 +69,14 @@ public class Mascota {
     public double getPeso() { return peso; }
     public void setPeso(double peso) { this.peso = peso;}
     
-    //sobrecarga de metodos para agregar servicio con distintos parametros
     
     public void agregarServicio(Servicio servicio){
         historialServicios.add(servicio);
     }
     
-    //hacer un clone pk es mala practica hacerlo asi, y no debe regresar pk aunque este todavia se podria modificar. 
+    
     public List<Servicio> getHistorialServicios() {
-        return Collections.unmodifiableList(historialServicios);
+        return new ArrayList<>(historialServicios);
     }
     
    

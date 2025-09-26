@@ -12,6 +12,8 @@ public class ConsultaGeneral extends Servicio {
     public ConsultaGeneral(String fecha, String profesional, String observacion){
         super(fecha, profesional, observacion);
     }
+    
+    //sobreescritura de metodos
     @Override
     public String getTipoServicio() { 
         return "Consulta General";
