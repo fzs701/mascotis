@@ -265,14 +265,15 @@ public class JavaApplication2 {
                     JOptionPane.showMessageDialog(null,"No hay servicios registrados para esta mascota :(");
                     return;
                 }
-                String[] columnas = {"Tipo", "Fecha", "Profesional", "Observacion"};
-                Object[][] datos = new Object[historial.size()][4];
+                String[] columnas = {"Tipo", "Fecha", "Profesional", "Observacion", "Costo"};
+                Object[][] datos = new Object[historial.size()][5];
                 for(int i = 0; i < historial.size(); i++){
                     Servicio s = historial.get(i);
                     datos[i][0] = s.getTipoServicio();
                     datos[i][1] = s.getFecha();
                     datos[i][2] = s.getProfesional();
                     datos[i][3] = s.getObservaciones();
+                    datos[i][4] = s.calcularCosto();
                 }
                 JTable table = new JTable(datos, columnas);
                 JScrollPane scroll = new JScrollPane(table);
@@ -286,7 +287,7 @@ public class JavaApplication2 {
                         for(Servicio s : mascota.getHistorialServicios()){
                             filas.add(new Object[]{
                                 cliente.getNombre(),mascota.getNombre(),s.getTipoServicio(),
-                                s.getFecha(), s.getProfesional(), s.getObservaciones()
+                                s.getFecha(), s.getProfesional(), s.getObservaciones() , s.calcularCosto()
                             });
                         }
                     }
@@ -295,7 +296,7 @@ public class JavaApplication2 {
                     JOptionPane.showMessageDialog(null, "No hay servicios registrados en el sistema.");
                     return;
                 }
-                 String[] columnas = {"Cliente", "Mascota", "Servicio", "Fecha", "Profesional", "Observaciones"};
+                String[] columnas = {"Cliente", "Mascota", "Servicio", "Fecha", "Profesional", "Observaciones", "Costo"};
                 Object[][] datos = filas.toArray(new Object[filas.size()][]);
 
                 JTable table = new JTable(datos, columnas);
