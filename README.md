@@ -31,13 +31,20 @@ Su objetivo principal es ofrecer una herramienta sencilla pero completa para la 
 
 ### 3. Verificar estructura del proyecto
 - En el panel de proyectos de NetBeans, expande la carpeta `Source Packages` o `Paquetes de origen`.  
-- Debe estar visible el paquete `javaapplication2` con las clases:  
+- Debe estar visible el paquete `javaapplication2` con las clases:
+  
 o	JavaApplication2.java → clase principal del sistema.
+
 o	Cliente.java → entidad cliente con atributos y métodos para administrar sus datos.
+
 o	Mascota.java → entidad mascota con historial de servicios.
+
 o	Servicio.java → clase base para modelar servicios veterinarios.
+
 o	Peluqueria.java y ConsultaGeneral.java → clases que heredan de Servicio y sobreescriben métodos.
+
 o	DatosCSV.java → maneja la persistencia en archivos CSV.
+
 o	Excepciones: ClienteNoEncontrado.java, MascotaNoEncontrada.java.
 
 
