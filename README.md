@@ -2,7 +2,9 @@
 
 ## Descripción
 Este proyecto consiste en una aplicación desarrollada en Java que permite la gestión integral de clientes, sus mascotas y los servicios veterinarios que reciben en una clínica o centro de cuidado animal.
+
 El sistema fue creado con un enfoque modular y escalable, utilizando conceptos de programación orientada a objetos (POO), colecciones de Java (HashMap y ArrayList), manejo de excepciones personalizadas, así como funcionalidades de persistencia de datos en archivos CSV y generación de reportes en TXT.
+
 La aplicación está diseñada para funcionar tanto en modo consola como con ventanas gráficas simples (Swing) que guían al usuario en la interacción.
 Su objetivo principal es ofrecer una herramienta sencilla pero completa para la administración de información veterinaria, garantizando orden, accesibilidad y trazabilidad 
 
